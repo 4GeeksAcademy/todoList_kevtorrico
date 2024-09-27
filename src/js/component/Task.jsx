@@ -5,14 +5,14 @@ const Task = (props) => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <div className="d-flex justify-content-between border p" 
+        <div className="d-flex justify-content-between border-bottom border-light-subtle" 
             onMouseEnter={()=>{setIsHovered(true);}}
             onMouseLeave={()=>{setIsHovered(false);}}>
             
-            <p>{props.task}</p>
-            {(isHovered) && <span onClick={()=>{
+            <p className='mt-2 mx-2'>{props.task}</p>
+            {(isHovered) && <span className='text-danger fs-5' onClick={()=>{
                 props.onRemove()
-            }}>X</span>}
+            }}>x</span>}
             
         </div>
     )

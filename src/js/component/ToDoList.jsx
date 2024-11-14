@@ -41,6 +41,17 @@ const ToDoList = () => {
             loadTasks();
         }
     }
+    const clearAllTasks = async()=>{
+        for (const task of taskList) {
+            const response = await fetch(`https://playground.4geeks.com/todo/todos/${task.id}`, {
+                method: 'DELETE'
+            });
+            if (!response.ok) {
+                console.error('Error al eliminar la tarea:', task.id);
+            }
+        }
+        setTaskList([]);
+    };
 
 
 
@@ -68,9 +79,18 @@ const ToDoList = () => {
                 onRemove={() => deleteTask(tarea.id)}
                 />
             ))}
-            <p className='text-start text-secondary text-opacity-50 fw-light fs-6'>
-                {taskList.length} items left
-            </p>
+            <div className='d-flex justify-content-between'>
+                <p className='text-start text-secondary text-opacity-50 fw-light fs-6'>
+                    {taskList.length} items left
+                </p>
+                <button 
+                    className='btn btn-light text-secondary text-opacity-50 fw-light fs-6 p-0 border-0'
+                    onClick={clearAllTasks}
+                    style={{ cursor: 'pointer', height: '24px', padding: '0 10px' }}
+                    >
+                    Clear All Taks
+                </button>
+            </div>
         </div>
     )
 }
